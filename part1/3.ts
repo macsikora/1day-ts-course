@@ -48,6 +48,12 @@ function userAge(user: UserWithDetails): number {
 let userKind = (user: UserWithDetails): UserKind => {
     return user.kind
 }
+
+function printId(id: number | string): number | string {
+    return id.toUpperCase(); //?
+}
+const b = printId('a');
+
 // higher order function
 let ageTransform = (user: UserWithDetails, f: (x: number) => number): UserWithDetails => {
     return {

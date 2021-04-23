@@ -11,15 +11,37 @@ function showName(user: User | null) {
     return user.name
 }
 
-
+// narrowing by typeof
 let z: string | number = 1 as string | number;
-
 if (typeof z === 'number') {
 
 } else {
 
 }
 
+// narrowing by typeof
+function printAll(strs: string | string[] | null) {
+    if (strs && typeof strs === "object") {
+      for (const s of strs) {
+        console.log(s);
+      }
+    } else if (typeof strs === "string") {
+      console.log(strs);
+    }
+  }
+
+// narrowing by instanceof
+function showDate(x: Date | string) {
+    if (x instanceof Date) {
+      return x.toUTCString();
+    } else {
+      return x.toUpperCase();
+    }
+  }
+
+
+
+// mutants 👾 - custom guards
 type Mutant = {
     name: string,
     strength: number,
@@ -38,11 +60,10 @@ const isHuman = (x: Somebody): x is Human => 'age' in x;
 const isMutant = (x: Somebody): x is Mutant => 'strength' in x;
 
 const welcome = (x: unknown) => {
-    // ...
+    // ... what now?
 }
 
-// decoder with using unknown
-
+// decoder narrowing with using unknown
 const decoder = <Out>(decode: (x: unknown) => Out) => (input: unknown): Out => {
     return decode(input);
 }
