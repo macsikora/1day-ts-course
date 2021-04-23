@@ -22,9 +22,10 @@ TS has two separated parts:
  type X = {a: string}
 
  // value space 🟡
- const x = { a: "a" }
+ let x = { a: "a", b: "b" }
+ x = {c: ''};
 
  // value space with type annotation
  const annX: X = { a: "a" }
 
- export {}
+ export {X}

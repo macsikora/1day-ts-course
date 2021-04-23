@@ -12,11 +12,11 @@ function showName(user: User | null) {
 }
 
 // narrowing by typeof
-let z: string | number = 1 as string | number;
+let z = 1 as string | number;
 if (typeof z === 'number') {
-
+    z
 } else {
-
+    z
 }
 
 // narrowing by typeof
@@ -54,14 +54,37 @@ type Human = {
 
 type Somebody = Mutant | Human
 
-const isObject = (x: unknown): x is object => typeof x === 'object'
+const isObject = (x: unknown): x is object => x !== null && typeof x === 'object'
 const isSomebody = (x: object): x is Somebody => 'name' in x
 const isHuman = (x: Somebody): x is Human => 'age' in x;
 const isMutant = (x: Somebody): x is Mutant => 'strength' in x;
 
 const welcome = (x: unknown) => {
     // ... what now?
+    if (isObject(x)) {
+        if (isSomebody(x)) {
+            if (isHuman(x)){
+                return 'Hi Human';
+            } else {
+                return 'Hi Mutant';
+            }
+        }
+    }
 }
+
+type X = keyof {
+    a?: string
+}
+
+
+
+
+
+
+
+
+
+
 
 // decoder narrowing with using unknown
 const decoder = <Out>(decode: (x: unknown) => Out) => (input: unknown): Out => {

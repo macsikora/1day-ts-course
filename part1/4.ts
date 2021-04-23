@@ -5,9 +5,9 @@ function concat(a: string, b: string) {
     return a + b
 }
 
-let v1: any = 1;
+let v1: any = true;
 let v2: any = [2]
-concat(v1, v2);
+concat(v1, v2); //?
 
 let str: string = v1;
 
@@ -21,7 +21,7 @@ if (typeof un === 'string') {
     str = un;
 }
 
-function appendToArray(arr: unknown, x: unknown) {
+function appendToArray(arr: unknown, x: unknown): unknown[] {
     if (Array.isArray(arr)) {
         return [...arr, x]
     } else {
@@ -29,7 +29,7 @@ function appendToArray(arr: unknown, x: unknown) {
     }
 }
 
-appendToArray(true, false) //?
+appendToArray([], false) //?
 
 
 // never
@@ -43,8 +43,10 @@ type HowSo = "Maciej" & "Stafan"
 function fn(x: string | number) {
     if (typeof x === "string") {
       // do something
+      x
     } else if (typeof x === "number") {
       // do something else
+      x
     } else {
       x; // has type 'never'!
     }
