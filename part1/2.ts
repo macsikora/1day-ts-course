@@ -121,7 +121,11 @@ interface IUser extends IEntity {
 type Paradox = True & False // never
 type NotPossible = string & number // never
 
-
+type Comment = {id: number, content: string}
+type NewUser = {
+    name: string
+    comments: Comment[]
+}
 // composition of types
 type Response = {
     user: User,
@@ -129,6 +133,7 @@ type Response = {
     otherField: number | string
     nested: {
         a: number
+        users: NewUser[]
     }
 }
 
