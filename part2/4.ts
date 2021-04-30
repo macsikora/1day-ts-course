@@ -4,7 +4,7 @@ import { User } from "../part1/2"
 
 // modeling the state by disjoint union
 
-type SimpleUnion = 1 | 2 | 3 // 3 elements
+type SimpleUnion = 1 | 2 | 3 | 3// 3 elements
 type AnotherSimpleUnion = 3 | 4 | 5 // 3 elements
 type ThirdSimpleUnion = SimpleUnion | AnotherSimpleUnion // 3 + 3 = 5 elements ?
 
@@ -44,34 +44,54 @@ function handleResponse(resp: Response<User, Error>) {
 }
 
 // nice type, we can work with it?
-type Creature = {
-    type: 'cat' | 'dog' | 'human',
+type Base = {
     age: number,
-    pesel?: string,
-    microchipNum?: string,
-    tailLength?: number,
-    eyeColor?: string,
-    employment?: boolean,
-    company?: string,
-    bloodType?: 'A' | 'AB' | 'B' | '0' | 'DEA.1' | 'DEA.2' | 'DEA.3'
+    eyeColor?: string
 }
+
+type Human = Base & {
+    type: 'human',
+    pesel: string,
+    employment: boolean,
+    company?: string,
+    bloodType: 'A' | 'AB' | 'B' | '0'
+}
+type Dog = Base & {
+    type: 'dog',
+    microchipNum: string,
+    tailLength: number,
+    bloodType: 'DEA.1' | 'DEA.2' | 'DEA.3'
+} 
+
+type Cat = Base & {
+    type: 'cat',
+    microchipNum: string,
+    tailLength: number,
+    bloodType: 'A' | 'B'
+}
+
+type Creature = Human | Dog | Cat
 
 const Marek: Creature = {
     type:'human',
     age: 23,
-    microchipNum: '123123123',
-    tailLength: 10,
+    pesel: 'asdasd',
     employment: false,
     company: 'Apple',
-    bloodType: 'DEA.1'
+    bloodType: 'A'
 }
 const Ciapek: Creature = {
     type: 'dog',
     age: 99,
-    pesel: '87689769879',
-    employment: true,
-    company: 'Amazon',
-    bloodType: 'A'
+    microchipNum: 'aasas',
+    bloodType: 'DEA.1',
+    tailLength: 12
+}
+
+function handleCreature(a: Creature) {
+    if (a.type === 'human') {
+        a.b
+    }
 }
 
 

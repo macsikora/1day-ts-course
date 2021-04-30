@@ -62,4 +62,15 @@ execute('a', (x) => x.toUpperCase()) //?
 execute(Promise.resolve('a'), x => x) //?
 
 
+
+type TrueOrFalse<X extends boolean> = X extends true ? 'Tak jestes True' : 'Nie zle';
+type OneTwoThree = 1 | 2 | 3
+
+type XX<T extends OneTwoThree> = T extends 1 ? 'One' :
+    T extends 2 ? 'Two' :
+    T extends 3 ? 'Three' : never
+
+type IsOne = XX<1 | 2 | 3>;
+
+
 export {}

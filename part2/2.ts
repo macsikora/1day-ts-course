@@ -7,6 +7,9 @@ type User = {
     active: boolean
 }
 type PartialUser = Partial<User>;
+const partUser: PartialUser = {
+
+}
 
 // Required all fields
 type ReqUser = Required<PartialUser>
@@ -33,12 +36,18 @@ const props: Properties = {
 
 
 // NonNullable
-type MaybeStr = string | null
+type MaybeStr = 'a' | 'b' | 'c' | 'd' | 'e' | null
 type Str = NonNullable<MaybeStr>
+
+type A = {a: string}
+type B = {b: string}
+type a = 'a' | 'c'
+type b = 'b' | 'c'
+type ab = a & b
 
 
 // Pick
-type Id = Pick<User,'id'>
+type Id = Pick<User,'id' | 'active'>
 
 
 // Omit
