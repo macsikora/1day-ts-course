@@ -34,7 +34,7 @@ let gamer: Gamer = {
 gamer = addScore(gamer, 10); // here gamer should be still Gamer and no error
 
 
-// function should work for all values with data field, but without loosing specific type
+// function should work for all values with 'data' field, but without loosing specific type
 const getData = (x: {data: TODO}): TODO => {
     return x.data
 }
@@ -64,5 +64,3 @@ const makeObj = (keys: TODO, values: TODO): TODO => {
 const obj = makeObj(['a','b'],[1,2])// should be Record<'a' | 'b', number>
 const obj2 = makeObj([1,2,3], [true, false, true])// should be Record<1 | 2 | 3, boolean>
 const obj3 = makeObj([1,2,3], 'error')// should be error
-
-

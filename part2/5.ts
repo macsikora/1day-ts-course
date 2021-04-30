@@ -25,7 +25,7 @@
 // server is the source of truth!
 // start type end points
 import fetch from 'node-fetch';
-type Comment = {
+export type Comment = {
     id: string,
     content: string
 }
@@ -34,7 +34,7 @@ const fetchComments = async (id: User['id']): Promise<Comment[]> => {
     return await result.json(); //?
 }
 
-fetchComments(12);
+const comments = fetchComments(12);
 
 
 
