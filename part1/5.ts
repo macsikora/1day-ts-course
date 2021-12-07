@@ -11,15 +11,37 @@ function showName(user: User | null) {
     return user.name
 }
 
-
-let z: string | number = 1 as string | number;
-
+// narrowing by typeof
+let z = 1 as string | number;
 if (typeof z === 'number') {
-
+    z
 } else {
-
+    z
 }
 
+// narrowing by typeof
+function printAll(strs: string | string[] | null) {
+    if (strs && typeof strs === "object") {
+      for (const s of strs) {
+        console.log(s);
+      }
+    } else if (typeof strs === "string") {
+      console.log(strs);
+    }
+  }
+
+// narrowing by instanceof
+function showDate(x: Date | string) {
+    if (x instanceof Date) {
+      return x.toUTCString();
+    } else {
+      return x.toUpperCase();
+    }
+  }
+
+
+
+// mutants 👾 - custom guards
 type Mutant = {
     name: string,
     strength: number,
@@ -32,17 +54,39 @@ type Human = {
 
 type Somebody = Mutant | Human
 
-const isObject = (x: unknown): x is object => typeof x === 'object'
+const isObject = (x: unknown): x is object => x !== null && typeof x === 'object'
 const isSomebody = (x: object): x is Somebody => 'name' in x
 const isHuman = (x: Somebody): x is Human => 'age' in x;
 const isMutant = (x: Somebody): x is Mutant => 'strength' in x;
 
 const welcome = (x: unknown) => {
-    // ...
+    // ... what now?
+    if (isObject(x)) {
+        if (isSomebody(x)) {
+            if (isHuman(x)){
+                return 'Hi Human';
+            } else {
+                return 'Hi Mutant';
+            }
+        }
+    }
 }
 
-// decoder with using unknown
+type X = keyof {
+    a?: string
+}
 
+
+
+
+
+
+
+
+
+
+
+// decoder narrowing with using unknown
 const decoder = <Out>(decode: (x: unknown) => Out) => (input: unknown): Out => {
     return decode(input);
 }
